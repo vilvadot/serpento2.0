@@ -1,0 +1,19 @@
+{
+  "name": "p5_scaffolding",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "parcel build ./src/index.html --public-url ./",
+    "dev": "parcel src/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "p5": "^0.7.3"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.11.0"
+  }
+}
