@@ -1,16 +1,16 @@
 import p5 from "p5";
-import { setupCanvas, drawBallAttachedToMouse } from "./lib/ballExample";
 
 global.p5 = p5;
 
 const sketch = () => {
 
   setup = () => {
-    setupCanvas()
+    createCanvas(1000,600)
+    background(40)
   };
 
   draw = () => {
-    drawBallAttachedToMouse()
+    ellipse(width/2, height/2, 10)
   };
 };
 
