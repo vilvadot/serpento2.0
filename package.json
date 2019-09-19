@@ -1,19 +1,25 @@
 {
-  "name": "p5_scaffolding",
-  "version": "1.0.0",
+  "name": "serpento",
+  "version": "2.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
-    "build": "parcel build ./src/index.html --public-url ./",
-    "dev": "parcel src/index.html"
+    "client:build": "parcel build src/index.html",
+    "client:dev": "parcel src/index.html",
+    "server:dev": "nodemon --watch ./src/server src/server/index.js",
+    "server:start": "node src/server/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "p5": "^0.7.3"
+    "node-osc": "^4.1.1",
+    "p5": "^0.9.0",
+    "socket.io": "^2.2.0"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.11.0"
+    "dotenv": "^8.1.0",
+    "nodemon": "^1.19.2",
+    "parcel-bundler": "^1.12.3"
   }
 }
