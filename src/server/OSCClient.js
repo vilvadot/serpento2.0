@@ -1,16 +1,18 @@
 const osc = require("node-osc");
-const OSCMessage = require("./OSCMessage");
+const CVMessage = require("./CVMessage");
 
 class OSCClient {
-  constructor(ip, port, bus) {
-    this.client = new osc.Server(port, ip);
+  constructor(bus) {
     this.bus = bus;
   }
 
-  start() {
+  connect(ip, port) {
+    this.client = new osc.Server(port, ip);
+
+    console.log(`⚡️  Connected to OSC: ${ip}:${port}`)
+    
     this.client.on("message", message => {
-      const jsonMessage = new OSCMessage(message).toJson()
-      console.log(message)
+      const jsonMessage = new CVMessage(message).toJson()
       this.bus.emit("OSC", jsonMessage, 0, 2);
     });
   }
