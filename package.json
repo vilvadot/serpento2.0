@@ -2,12 +2,11 @@
   "name": "serpento",
   "version": "2.0.0",
   "description": "",
-  "main": "index.html",
   "scripts": {
     "client:build": "parcel build src/index.html",
     "client:dev": "parcel src/index.html",
-    "server:dev": "nodemon --watch ./src/server src/server/index.js",
-    "server:start": "node src/server/index.js"
+    "server-cv:dev": "nodemon --watch ./src/server/with-community-vision src/server/with-community-vision/index.js",
+    "server-cv:start": "node src/server/with-community-vision/index.js"
   },
   "keywords": [],
   "author": "",
