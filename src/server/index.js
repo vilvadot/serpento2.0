@@ -1,43 +1,32 @@
-const osc = require('node-osc');
-const oscToJSON = require('./oscToJSON');
-const events = require('events');
-const http = require('http').Server();
-const io = require('socket.io')(http);
-const dotenv = require('dotenv').config()
-const eventEmitter = new events.EventEmitter();
+const events = require("events");
+const http = require("http").Server();
+const io = require("socket.io")(http);
+const OSCClient = require("./OSCClient");
+require("dotenv").config();
 
-const serverIp = '127.0.0.1'; // Communit Core Vision emiting IP
-const OSCPort = 3333;  // Communit Core Vision emiting PORT
-const SocketPort = 5000;
-let activeClients = [];
+const { CV_IP, CV_PORT, PORT } = process.env;
+const activeClients = [];
+const communicationBus = new events.EventEmitter();
 
-console.log(process.env.CV_IP)
+new OSCClient(CV_IP, CV_PORT, communicationBus).start()
 
-const oscServer = new osc.Server(OSCPort, serverIp);
-
-http.listen(SocketPort, function(){
-    console.log(`listening sockets on: ${SocketPort}`);
-})
-
-// Listen for message stream
-oscServer.on('message', function (message) {
-    console.log(oscToJSON(message));
-    // Run in JSOn or in OSC mode
-    eventEmitter.emit('OSC', oscToJSON(message), 0, 2);
+http.listen(PORT, () => {
+  console.log(`listening sockets on: ${PORT}`);
+  communicationBus.emit("message", "AFADFaf");
 });
 
 // SOCKET.IO Loop
-io.on('connection', function(socket){
-    socket.on('hi', function(userId){
-        console.log('user connected: ' + userId);
-        activeClients.push(userId);
-    });
-    socket.on('disconnect', function() {
-        const disconnectedUser = activeClients.indexOf(socket);
-        activeClients = activeClients.splice(disconnectedUser, 1);
-        console.log('Got disconnect!' + disconnectedUser);
-    });
-    eventEmitter.on('OSC', function(msg){
-        socket.emit('osc-stream', msg);
-    });
+io.on("connection", socket => {
+  socket.on("hi", userId => {
+    console.log("user connected: " + userId);
+    activeClients.push(userId);
+  });
+  socket.on("disconnect", () => {
+    const disconnectedUser = activeClients.indexOf(socket);
+    activeClients = activeClients.splice(disconnectedUser, 1);
+    console.log("Got disconnect!" + disconnectedUser);
+  });
+  communicationBus.on("OSC", msg => {
+    socket.emit("osc-stream", msg);
+  });
 });
