@@ -1,6 +1,6 @@
 const events = require("events");
-const OSCClient = require("./OSCClient");
-const SocketsServer = require("./SocketsServer");
+const OSCClient = require("../networking/OSCClient");
+const SocketsServer = require("../networking/SocketsServer");
 
 require("dotenv").config();
 

@@ -1,4 +1,4 @@
-class CVMessage {
+class CVPacket {
   constructor(message) {
     this.message = message;
     this.fixedParams = 4;
@@ -59,4 +59,4 @@ class CVMessage {
   }
 }
 
-module.exports = CVMessage;
+module.exports = CVPacket;

@@ -53,4 +53,3 @@ Starting in full mode...
 
 Community Core Vision is setup!
 
-Vision module has exited!
