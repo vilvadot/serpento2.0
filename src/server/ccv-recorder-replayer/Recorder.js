@@ -1,10 +1,9 @@
 const fs = require("fs");
-const path = require("path");
 
 class Recorder {
   constructor(fileName, bus) {
     this.bus = bus;
-    this.file = path.resolve(__dirname, fileName);
+    this.file = fileName;
     this.lastMessage = {}
     this.stream = fs.createWriteStream(this.file, {
       flags: "r+",
@@ -16,7 +15,7 @@ class Recorder {
     this._createFile();
     this.bus.on(message, (data) => this._writeToFile(data));
     this.stream.on("finish", () => {
-      console.log(`Messages recorded to ${this.file}`);
+      console.log(`👍🏻  Messages recorded to ${this.file}`);
     });
   }
 

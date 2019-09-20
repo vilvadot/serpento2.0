@@ -7,7 +7,9 @@
     "client:dev": "parcel src/index.html",
     "server:dev": "nodemon --watch ./src/server src/server/with-community-vision/index.js",
     "server:start": "node src/server/with-community-vision/index.js",
-    "recorder:dev": "nodemon --watch ./src/server src/server/ccv-recorder/index.js --ignore src/server/ccv-recorder/tracking.json"
+    "record:dev": "nodemon --watch ./src/server --ignore src/server/*.json src/server/record.js ",
+    "record": "node src/server/record.js ",
+    "replay:dev": "nodemon --watch ./src/server --ignore src/server/*.json src/server/replay.js "
   },
   "keywords": [],
   "author": "",
