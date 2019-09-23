@@ -10,7 +10,7 @@ export default class TimeMarker {
     this.y = 28;
   }
 
-  draw(time) {
+  draw(time) { // This should be a countdown
     const timeInSeconds = time * 10
     textSize(FONT_SIZE * this.multiplier);
     fill(255);

@@ -8,6 +8,7 @@ import Timer from "./Timer";
 import Food from "./Food";
 import Game from "./Game";
 import Assets from "./Assets";
+import config from './config'
 
 var EventEmitter = require("eventemitter3");
 
@@ -15,23 +16,21 @@ require("dotenv").config();
 
 global.p5 = p5;
 
-let { SCREEN_SIZE } = process.env;
-const FREQUENCY = 1000;
+const FREQUENCY = 50;
 
 const fakeServer = new Replayer(mockData, FREQUENCY);
-
-export const bus = new EventEmitter();
-const game = new Game();
-const arena = new Arena(SCREEN_SIZE);
-const scoreBoard = new Scoreboard(SCREEN_SIZE);
-const logo = new Logo(SCREEN_SIZE);
-const timer = new Timer(SCREEN_SIZE);
-const food = new Food(SCREEN_SIZE);
 
 fakeServer.replay(message => {
   game.updatePlayers(message.blobs);
 });
 
+export const bus = new EventEmitter();
+const game = new Game();
+const arena = new Arena(config.screenSize);
+const scoreBoard = new Scoreboard(config.screenSize);
+const logo = new Logo(config.screenSize);
+const timer = new Timer(config.screenSize);
+const food = new Food(config.screenSize);
 let assets;
 
 const sketch = () => {
@@ -49,12 +48,12 @@ const sketch = () => {
 
   draw = () => {
     background(0);
-    game.update();
     arena.draw();
     logo.draw(assets.logo);
     scoreBoard.draw();
-    timer.draw(game.time);
+    timer.draw(game.time); // This updated every frame. Should be updated outside the main loop
     food.draw();
+    game.update();
   };
 };
 

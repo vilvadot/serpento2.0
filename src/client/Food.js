@@ -3,14 +3,14 @@ import {bus} from './main'
 import {random} from './utilities'
 
 const FONT_SIZE = 10;
-const DEFAULT_SIZE = 20;
+const DEFAULT_SIZE = 10;
 
 class Food {
   constructor(multiplier = 1) {
     this.multiplier = multiplier;
     this.x = random(192 * this.multiplier, 0);
     this.y = random(157 * this.multiplier, 32 * this.multiplier);
-    this.size = DEFAULT_SIZE;
+    this.size = DEFAULT_SIZE * this.multiplier;
     this.food;
   }
 

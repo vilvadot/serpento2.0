@@ -1,9 +1,11 @@
+import Score from './Score'
+
 class Scoreboard {
   constructor(multiplier = 1, markers) {
     this.multiplier = multiplier;
-    this.markers = markers;
+    this.marker = new Score(multiplier, 'EQUIPO 1', 'red', 40, 28);
   }
-  
+
   draw() {
     strokeWeight(1);
     stroke(255);
@@ -15,6 +17,11 @@ class Scoreboard {
       16 * this.multiplier
     );
     this._drawMiddleLine();
+    this._drawScore()
+  }
+
+  _drawScore(){
+    this.marker.draw()
   }
 
   _drawMiddleLine() {
