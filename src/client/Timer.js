@@ -1,23 +1,23 @@
 import moment from "moment";
 import "moment-duration-format";
 
-let horizPos = 125;
+const FONT_SIZE = 19
 
 export default class TimeMarker {
   constructor(multiplier) {
     this.multiplier = multiplier;
-    this.time = 0;
+    this.x = 118;
+    this.y = 28;
   }
+
   draw(time) {
-    this.time = time;
+    const timeInSeconds = time * 10
+    textSize(FONT_SIZE * this.multiplier);
     fill(255);
-    if (this.time >= 60) {
-      horizPos = 120;
-    }
     text(
-      moment.duration(this.time, "seconds").format("mm:ss"),
-      horizPos * this.multiplier,
-      28 * this.multiplier
+      moment(timeInSeconds).format("mm:ss"),
+      this.x * this.multiplier,
+      this.y * this.multiplier
     );
   }
 }

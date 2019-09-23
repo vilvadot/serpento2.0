@@ -1,45 +1,53 @@
-const getRandomNum = (min, max) =>  {
-  return Math.floor(Math.random() * (max - min) + min);
-};
+import {FOOD_EATEN} from './events'
+import {bus} from './main'
+import {random} from './utilities'
+
+const FONT_SIZE = 10;
+const DEFAULT_SIZE = 20;
 
 class Food {
-  constructor(p5, game, size, multiplier = 1, debug = false) {
-    this.p5 = p5;
+  constructor(multiplier = 1) {
     this.multiplier = multiplier;
-    this.debug = debug;
-    this.game = game;
-    this.x = getRandomNum(0, 192 * this.multiplier);
-    this.y = getRandomNum(32 * this.multiplier, 157 * this.multiplier);
-    this.size = size || 20;
+    this.x = random(192 * this.multiplier, 0);
+    this.y = random(157 * this.multiplier, 32 * this.multiplier);
+    this.size = DEFAULT_SIZE;
+    this.food;
   }
 
-  drawInfo(){
-    this.p5.noStroke();
-    this.p5.fill('#EE0D61');
-    this.p5.textSize(8);
-    this.p5.text(`(x:${this.x.toFixed(0)}, y:${this.y.toFixed(0)})`, this.x + 20 , this.y + 20);
+  load(foods) {
+    this.foodBank = foods;
+    this.updateFood();
   }
 
-  reposition(){
-    this.x = getRandomNum(0, 192 * this.multiplier),
-    this.y = getRandomNum(32 * this.multiplier, 157 * this.multiplier);
+  updateFood() {
+    const randomIndex = random(this.foodBank.length);
+    return (this.food = this.foodBank[randomIndex]);
   }
 
-  eaten(){
-    this.game.updateFood();
+  debug() {
+    noStroke();
+    fill("#EE0D61");
+    textSize(FONT_SIZE * this.multiplier);
+    const x = this.x.toFixed(0);
+    const y = this.y.toFixed(0);
+    text(`x:${x}, y:${y}`, this.x + 20, this.y + 20);
+  }
+
+  reposition() {
+    this.x = random(192 * this.multiplier)
+    this.y = random(157 * this.multiplier, 32 * this.multiplier)
+  }
+
+  eat() {
+    bus.emit(FOOD_EATEN)
     this.reposition();
   }
 
-  draw(image) {
-    if(!image){
-      this.p5.fill('#EE0D61');
-      this.p5.ellipse(this.x, this.y, this.size, this.size);
-    }else{
-      this.p5.noStroke();
-      this.p5.image(image, this.x, this.y, this.size, this.size );
-    }
-      this.drawInfo();
+  draw() {
+    noStroke();
+    image(this.food, this.x, this.y, this.size, this.size);
+    this.debug();
   }
 }
 
-export default Food
+export default Food;

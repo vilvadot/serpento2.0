@@ -1,71 +1,60 @@
 import p5 from "p5";
-import Arena from './Arena'
-import mockData from './mock_tracking.json'
-import Replayer from '../replayer/Replayer'
+import Arena from "./Arena";
+import mockData from "./mock_tracking.json";
+import Replayer from "../replayer/Replayer";
 import Scoreboard from "./Scoreboard";
 import Logo from "./Logo";
 import Timer from "./Timer";
-require('dotenv').config()
+import Food from "./Food";
+import Game from "./Game";
+import Assets from "./Assets";
+
+var EventEmitter = require("eventemitter3");
+
+require("dotenv").config();
 
 global.p5 = p5;
 
-const {SCREEN_SIZE} = process.env
-const FREQUENCY = 1000
+let { SCREEN_SIZE } = process.env;
+const FREQUENCY = 1000;
 
-const fakeServer = new Replayer(mockData, FREQUENCY)
+const fakeServer = new Replayer(mockData, FREQUENCY);
 
-class Game {
-  constructor(){
-    this.players = []
-  }
+export const bus = new EventEmitter();
+const game = new Game();
+const arena = new Arena(SCREEN_SIZE);
+const scoreBoard = new Scoreboard(SCREEN_SIZE);
+const logo = new Logo(SCREEN_SIZE);
+const timer = new Timer(SCREEN_SIZE);
+const food = new Food(SCREEN_SIZE);
 
-  start(){
-    console.log('game has started!')
-  }
+fakeServer.replay(message => {
+  game.updatePlayers(message.blobs);
+});
 
-  updatePlayers(playersPositions){
-    this.players = playersPositions
-  }
-}
-
-const game = new Game()
-const arena = new Arena(SCREEN_SIZE)
-const scoreBoard = new Scoreboard(SCREEN_SIZE)
-const logo = new Logo(SCREEN_SIZE)
-const timer = new Timer(SCREEN_SIZE)
-
-fakeServer.replay((message) => {
-  game.updatePlayers(message.blobs)
-  // Emmit "OSC" message through bus to imitate CCV server
-})
-
-
-let assets
-
-const loadAssets = () => {
-  return {
-    logo: loadImage(require('./assets/img/logo.png'))
-  }
-}
-
+let assets;
 
 const sketch = () => {
   preload = () => {
-    assets = loadAssets()
+    assets = Assets.getAssets();
   };
 
   setup = () => {
-    createCanvas(1000,600)
+    createCanvas(1000, 600);
     background(0);
-    game.start()
+    game.start();
+    food.load(assets.foods);
+    textFont(assets.font);
   };
 
   draw = () => {
-    arena.draw()
-    scoreBoard.draw()
-    logo.draw(assets.logo)
-    timer.draw()
-    ellipse(width/2, height/2, 10)
+    background(0);
+    game.update();
+    arena.draw();
+    logo.draw(assets.logo);
+    scoreBoard.draw();
+    timer.draw(game.time);
+    food.draw();
   };
 };
 
