@@ -14,7 +14,8 @@ class Game {
   constructor(assets, bus) {
     this.assets = assets;
     this.bus = bus;
-    this.players = new Players();
+    this.food = new Food();
+    this.players = new Players(this.food);
     this.arena = new Arena();
     this.scoreBoard = new ScoreBoard();
     this.logo = new Logo(this.assets.logo);
@@ -37,9 +38,11 @@ class Game {
   }
 
   _handleFood() {
-    this.food = new Food();
     this.food.loadFoods(this.assets.foods);
-    this.bus.on(TIMER_RESET, () => this.food.regenerate());
+    this.bus.on(TIMER_RESET, () => {
+      this.food.regenerate()
+      this.players.updateFood(this.food)
+    });
   }
 
   _handleMousePlayer() {

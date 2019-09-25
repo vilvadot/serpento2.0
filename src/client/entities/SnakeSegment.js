@@ -94,8 +94,8 @@ class SnakeSegment{
   //   }
   // }
 
-  draw(x, y){
-    fill(this.color);
+  draw(x, y, color){
+    fill(color);
     ellipse(x, y, 10, 10);
     // stroke(this.color);
     // if(this.id.includes('head') && CONFIG.debugText){

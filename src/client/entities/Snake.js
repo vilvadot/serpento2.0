@@ -1,31 +1,32 @@
-import SnakeSegment from './SnakeSegment'
+import SnakeSegment from "./SnakeSegment";
 import config from "../config";
-import { random } from "../utilities";
+import { random, translateX, translateY } from "../utilities";
 
-const translateXToCanvas = x => {
-  return Math.floor(x * config.width * config.screenSize + config.widthOffset);
-};
-
-const translateYToCanvas = y => {
-  return Math.floor(y * config.height * config.screenSize + config.heightOffset);
-};
+const BLINK_DURATION = 100;
 
 class Snake {
   constructor(id, x, y) {
     this.id = id;
+    this.points = 0;
     this.color = this._getRandomColor();
-    this.x = translateXToCanvas(x);
-    this.y = translateYToCanvas(y);
-    this.segments = [new SnakeSegment(this.color)]
+    this.x = translateX(x);
+    this.y = translateY(y);
+    this.isBlinking = false;
+    this.segments = [new SnakeSegment(this.color)];
+  }
+
+  eat() {
+    this.points++
+    this._blink();
   }
 
   update({ x, y }) {
-    this.x = translateXToCanvas(x);
-    this.y = translateYToCanvas(y);
+    this.x = translateX(x);
+    this.y = translateY(y);
   }
 
   draw() {
-    this.segments.forEach(segment => segment.draw(this.x, this.y))
+    this.segments.forEach(segment => segment.draw(this.x, this.y, this.color));
     this._debug();
   }
 
@@ -37,6 +38,18 @@ class Snake {
     text(`id: ${this.id}, x: ${this.x}, y: ${this.y}`, this.x + 20, this.y);
   }
 
+  _blink() {
+    if (!this.isBlinking) {
+      const oldColor = this.color;
+      this.color = "#fff";
+      this.isBlinking = true;
+      setTimeout(() => {
+        this.color = oldColor;
+        this.isBlinking = false;
+      }, BLINK_DURATION);
+    }
+  }
+
   _getRandomColor() {
     const randomIndex = random(config.teams.red.length);
     return config.teams.red[randomIndex];
@@ -44,7 +57,6 @@ class Snake {
 }
 
 export default Snake;
-
 
 // const createSnake = (game, p5, player, snakeColor, snakeIndex, team) => {
 

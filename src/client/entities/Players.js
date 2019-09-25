@@ -1,13 +1,19 @@
 import Snake from "./Snake";
+import Collision from "./Collision";
 
 class PlayerCollection {
-  constructor() {
+  constructor(food) {
     this.players = [];
+    this.food = food;
   }
 
-  update(id, blob){
+  updateFood(food) {
+    this.food = food;
+  }
+
+  update(id, blob) {
     const player = this.find(id);
-    player.update(blob)
+    player.update(blob);
   }
 
   add(player) {
@@ -20,7 +26,16 @@ class PlayerCollection {
   }
 
   draw() {
-    this.players.forEach(player => player.draw());
+    this.players.forEach(player => {
+      const isEaten = Collision.check(
+        player.x,
+        player.y,
+        this.food.x,
+        this.food.y
+      );
+      if (isEaten) player.eat();
+      player.draw();
+    });
   }
 }
 

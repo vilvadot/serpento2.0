@@ -40,14 +40,6 @@ class Food {
     this.y = random(157 * this.multiplier, 32 * this.multiplier)
   }
 
-  _isEaten(x, y){
-    const bound = 30
-    const xCollision = (this.x - bound <= this.x) && (this.x + bound >= this.x);
-    const yCollision = (this.y - bound <= this.y) && (this.y + bound >= this.y);
-
-    return xCollision && yCollision
-  }
-
   _selectRandomFood() {
     const randomIndex = random(this.foodBank.length);
     return (this.food = this.foodBank[randomIndex]);

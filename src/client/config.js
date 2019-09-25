@@ -8,7 +8,7 @@ const config = {
   heightOffset: 100,
   widthOffset: 100,
   screenSize: SCREEN_SIZE,
-  foodCountdown: 10,
+  foodCountdown: 3,
   teams: {
     red: ["#FE04FE", "#FF0001", "#FF5A01", "#FFFE01"],
     blue: ["#2EFE02", "#00FFFF", "#008EFE", "#002EFF"]
