@@ -49,7 +49,7 @@ class Game {
   _handleFood() {
     this.food = new Food();
     this.food.loadFoods(this.assets.foods);
-    this.bus.on(TIMER_RESET, () => this.food.reposition());
+    this.bus.on(TIMER_RESET, () => this.food.regenerate());
   }
 
   _handlePlayerPositions() {

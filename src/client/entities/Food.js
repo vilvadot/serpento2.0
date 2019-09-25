@@ -12,7 +12,6 @@ class Food {
     this.x = random(192 * this.multiplier, 0);
     this.y = random(157 * this.multiplier, 32 * this.multiplier);
     this.size = DEFAULT_SIZE * this.multiplier;
-    this.food;
   }
 
   draw() {
@@ -28,13 +27,25 @@ class Food {
 
   eat() {
     bus.emit(FOOD_EATEN)
-    this.reposition();
+    this.regenerate();
   }
 
-  reposition() {
+  regenerate() {
     this._selectRandomFood()
+    this._setRandomPosition()
+  }
+
+  _setRandomPosition(){
     this.x = random(192 * this.multiplier)
     this.y = random(157 * this.multiplier, 32 * this.multiplier)
+  }
+
+  _isEaten(x, y){
+    const bound = 30
+    const xCollision = (this.x - bound <= this.x) && (this.x + bound >= this.x);
+    const yCollision = (this.y - bound <= this.y) && (this.y + bound >= this.y);
+
+    return xCollision && yCollision
   }
 
   _selectRandomFood() {
