@@ -33,7 +33,10 @@ class PlayerCollection {
         this.food.x,
         this.food.y
       );
-      if (isEaten) player.eat();
+      if (isEaten) {
+        player.eat();
+        this.food.regenerate()
+      }
       player.draw();
     });
   }

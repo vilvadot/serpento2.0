@@ -17,7 +17,7 @@ class Food {
   draw() {
     noStroke();
     image(this.food, this.x, this.y, this.size, this.size);
-    this._debug();
+    if(config.debug) this._debug();
   }
 
   loadFoods(foods) {

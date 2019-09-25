@@ -27,7 +27,7 @@ class Snake {
 
   draw() {
     this.segments.forEach(segment => segment.draw(this.x, this.y, this.color));
-    this._debug();
+    if(config.debug) this._debug();
   }
 
   _debug() {
