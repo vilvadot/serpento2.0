@@ -20,10 +20,12 @@ const sketch = () => {
   setup = () => {
     Mouse.track()
     Server.start();
+    console.log('hey!')
     createCanvas(1000, 600);
     background(0);
     textFont(assets.font);
     game.start();
+    document.querySelector("#defaultCanvas0").remove() // remove weird extra canvas
   };
 
   draw = () => {

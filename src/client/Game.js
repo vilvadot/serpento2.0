@@ -37,8 +37,12 @@ class Game {
   }
 
   _handleMousePlayer() {
-    this.bus.on(MOUSE_POSITION, positionV => {
-      console.log(positionV);
+    this.bus.on(MOUSE_POSITION, position => {
+      const isMousePlayerActive = this.players.find("mouse");
+      if (!isMousePlayerActive) {
+        return this.players.add(position);
+      }
+      return this.players.update("mouse", position);
     });
   }
 
