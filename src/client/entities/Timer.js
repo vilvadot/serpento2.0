@@ -29,7 +29,7 @@ export default class TimeMarker {
     return Math.ceil(time / 1000);
   }
 
-  _resetTimer() {
+  reset() {
     this.time = DEFAULT_TIME;
     this.bus.emit(TIMER_RESET);
   }
@@ -43,8 +43,6 @@ export default class TimeMarker {
 
   _updateTime() {
     this.time -= 10;
-    if (this.time <= 0) {
-      this._resetTimer();
-    }
+    if (this.time <= 0) this.reset();
   }
 }

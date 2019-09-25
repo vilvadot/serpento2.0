@@ -4,11 +4,14 @@ import Arena from "./entities/Arena";
 import ScoreBoard from "./entities/ScoreBoard";
 import Timer from "./entities/Timer";
 import Logo from "./entities/Logo";
-import { TIMER_RESET, PLAYER_POSITIONS, MOUSE_POSITION } from "./events";
+import {
+  TIMER_RESET,
+  PLAYER_POSITIONS,
+  MOUSE_POSITION,
+  FOOD_EATEN
+} from "./events";
 
 // TODO: Pintar segmentos de serpiente
-// TODO: Hacer que las serpientes crezcan/parpadeen
-// TOOD: Meter lógica ratón/websockets para multiplayer
 
 class Game {
   constructor(assets, bus) {
@@ -40,8 +43,12 @@ class Game {
   _handleFood() {
     this.food.loadFoods(this.assets.foods);
     this.bus.on(TIMER_RESET, () => {
-      this.food.regenerate()
-      this.players.updateFood(this.food)
+      this.food.regenerate();
+      this.players.updateFood(this.food);
+    });
+    this.bus.on(FOOD_EATEN, () => {
+      this.food.regenerate();
+      this.timer.reset()
     });
   }
 

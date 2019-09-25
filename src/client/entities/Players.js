@@ -1,5 +1,7 @@
 import Snake from "./Snake";
 import Collision from "./Collision";
+import bus from "../bus";
+import { FOOD_EATEN } from "../events";
 
 class PlayerCollection {
   constructor(food) {
@@ -33,10 +35,7 @@ class PlayerCollection {
         this.food.x,
         this.food.y
       );
-      if (isEaten) {
-        player.eat();
-        this.food.regenerate()
-      }
+      if (isEaten) bus.emit(FOOD_EATEN);
       player.draw();
     });
   }
