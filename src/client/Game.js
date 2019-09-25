@@ -36,37 +36,33 @@ class Game {
     this.players.draw();
   }
 
-  _handleMousePlayer() {
-    this.bus.on(MOUSE_POSITION, position => {
-      const isMousePlayerActive = this.players.find("mouse");
-      if (!isMousePlayerActive) {
-        return this.players.add(position);
-      }
-      return this.players.update("mouse", position);
-    });
-  }
-
   _handleFood() {
     this.food = new Food();
     this.food.loadFoods(this.assets.foods);
     this.bus.on(TIMER_RESET, () => this.food.regenerate());
   }
 
-  _handlePlayerPositions() {
-    this.bus.on(PLAYER_POSITIONS, positions => {
-      this._updateSnakesPosition(positions);
+  _handleMousePlayer() {
+    this.bus.on(MOUSE_POSITION, blob => {
+      this._updateSnakesPosition("mouse", blob);
     });
   }
 
-  _updateSnakesPosition(trackedPlayers) {
+  _handlePlayerPositions() {
     // TODO: Remove unactive Ids
-    trackedPlayers.forEach(blob => {
-      const isPlayerActive = this.players.find(blob.id);
-      if (!isPlayerActive) {
-        return this.players.add(blob);
-      }
-      return this.players.update(blob.id, blob);
+    this.bus.on(PLAYER_POSITIONS, positions => {
+      positions.forEach(blob => {
+        this._updateSnakesPosition(blob.id, blob);
+      });
     });
+  }
+
+  _updateSnakesPosition(id, blob) {
+    const isPlayerActive = this.players.find(id);
+    if (!isPlayerActive) {
+      return this.players.add(blob);
+    }
+    return this.players.update(id, blob);
   }
 }
 
