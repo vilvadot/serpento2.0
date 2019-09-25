@@ -1,16 +1,20 @@
 class Replayer {
-  constructor(messages, frequency){
-    this.messages = messages
-    this.frequency = frequency
+  constructor(messages, frequency) {
+    this.messages = messages;
+    this.frequency = frequency;
   }
 
-  replay(callback){
-    let index = 0
+  replay(callback) {
+    let index = 0;
     setInterval(() => {
-      callback(this.messages[index])
-      index++
-    }, this.frequency)
+      const isLastMessage = index === this.messages.length - 2;
+      if (isLastMessage) {
+        return index = 0;
+      }
+      index++;
+      callback(this.messages[index]);
+    }, this.frequency);
   }
 }
 
-module.exports = Replayer
+module.exports = Replayer;

@@ -1,9 +1,10 @@
 import Score from './Score'
+import config from './config'
 
 class Scoreboard {
-  constructor(multiplier = 1, markers) {
-    this.multiplier = multiplier;
-    this.marker = new Score(multiplier, 'EQUIPO 1', 'red', 40, 28);
+  constructor() {
+    this.multiplier = config.screenSize;
+    this.marker = new Score(this.multiplier, 'EQUIPO 1', 'red', 40, 28);
   }
 
   draw() {

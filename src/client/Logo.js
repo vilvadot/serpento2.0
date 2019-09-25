@@ -1,6 +1,8 @@
+import config from './config'
+
 class Logo {
-  constructor(multiplier = 1) {
-    this.multiplier = multiplier;
+  constructor() {
+    this.multiplier = config.screenSize;
   }
   draw(img) {
     strokeWeight(1);

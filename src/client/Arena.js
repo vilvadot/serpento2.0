@@ -1,8 +1,8 @@
 import config from './config'
 
 class Arena {
-  constructor(multiplier = 1) {
-    this.multiplier = multiplier;
+  constructor() {
+    this.multiplier = config.screenSize;
   }
 
   draw() {

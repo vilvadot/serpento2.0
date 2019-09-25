@@ -1,4 +1,4 @@
-const FONT_SIZE = 16
+const FONT_SIZE = 17
 
 class Score {
   constructor(multiplier = 1, text = "EQUIPO", color, x, y) {
@@ -18,6 +18,7 @@ class Score {
   _drawNumber(){
     const offset = (50 * this.multiplier)
     fill(255);
+    noStroke();
     textSize(FONT_SIZE * this.multiplier);
     text(this.points, this.x * this.multiplier + offset, this.y * this.multiplier);
   }

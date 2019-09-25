@@ -1,36 +1,4 @@
-import config from "./config";
-import {random} from './utilities'
-
-class Player {
-  constructor(id, x, y) {
-    this.id = id;
-    this.color = this._getRandomColor()
-    this.x = Number(x);
-    this.y = Number(y);
-  }
-
-  update({ x, y }) {
-    this.x = Number(x);
-    this.y = Number(y);
-  }
-
-  draw() {
-    const x = this.x * config.width * config.screenSize + config.widthOffset
-    const y = this.y * config.height * config.screenSize + config.heightOffset
-    fill(this.color);
-    ellipse(
-      x,
-      y,
-      10,
-      10
-    );
-  }
-
-  _getRandomColor(){
-    const randomIndex = random(config.teams.red.length)
-    return config.teams.red[randomIndex]
-  }
-}
+import Snake from "./Snake";
 
 class PlayerCollection {
   constructor() {
@@ -39,7 +7,7 @@ class PlayerCollection {
 
   add(player) {
     const { id, x, y } = player;
-    this.players.push(new Player(id, x, y));
+    this.players.push(new Snake(id, x, y));
   }
 
   find(candidate) {
