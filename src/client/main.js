@@ -2,6 +2,7 @@ import p5 from "p5";
 import Game from "./Game";
 import Assets from "./Assets";
 import Server from "./Server";
+import Mouse from "./Mouse";
 import bus from "./bus";
 
 require("dotenv").config();
@@ -17,6 +18,7 @@ const sketch = () => {
   };
 
   setup = () => {
+    Mouse.track()
     Server.start();
     createCanvas(1000, 600);
     background(0);
