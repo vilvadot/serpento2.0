@@ -1,5 +1,5 @@
-import config from "./config";
-import { TIMER_RESET } from "./events";
+import config from "../config";
+import { TIMER_RESET } from "../events";
 
 const FONT_SIZE = 19;
 const TIME_IN_SECONDS = config.foodCountdown;

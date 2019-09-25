@@ -1,10 +1,10 @@
-import Players from "./Players";
-import Food from "./Food";
-import Arena from "./Arena";
-import ScoreBoard from "./ScoreBoard";
-import Timer from "./Timer";
+import Players from "./entities/Players";
+import Food from "./entities/Food";
+import Arena from "./entities/Arena";
+import ScoreBoard from "./entities/ScoreBoard";
+import Timer from "./entities/Timer";
+import Logo from "./entities/Logo";
 import { TIMER_RESET, PLAYER_POSITIONS } from "./events";
-import Logo from "./Logo";
 
 class Game {
   constructor(assets, bus) {

@@ -1,5 +1,5 @@
 import Score from './Score'
-import config from './config'
+import config from '../config'
 
 class Scoreboard {
   constructor() {

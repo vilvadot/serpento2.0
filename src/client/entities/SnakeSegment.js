@@ -1,6 +1,7 @@
-import CONFIG from '../../config';
-
 class SnakeSegment{
+  constructor(color){
+    this.color = color
+  }
   // constructor(id, team, index, parent, length, weight, color, x, y){
   //   this.id = id;
   //   this.index = index || 1;
@@ -93,13 +94,15 @@ class SnakeSegment{
   //   }
   // }
 
-  draw(){
-    stroke(this.color);
-    if(this.id.includes('head') && CONFIG.debugText){
-      this.drawInfo();
-    }
-    strokeWeight(this.weight);
-    line(this.a.x,this.a.y,this.b.x,this.b.y);
+  draw(x, y){
+    fill(this.color);
+    ellipse(x, y, 10, 10);
+    // stroke(this.color);
+    // if(this.id.includes('head') && CONFIG.debugText){
+    //   this.drawInfo();
+    // }
+    // strokeWeight(this.weight);
+    // line(this.a.x,this.a.y,this.b.x,this.b.y);
   }
 }
 

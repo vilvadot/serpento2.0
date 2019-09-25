@@ -1,7 +1,7 @@
-import {FOOD_EATEN} from './events'
-import bus from './bus'
-import {random} from './utilities'
-import config from './config'
+import {FOOD_EATEN} from '../events'
+import bus from '../bus'
+import {random} from '../utilities'
+import config from '../config'
 
 const FONT_SIZE = 10;
 const DEFAULT_SIZE = 6;
