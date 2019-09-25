@@ -21,6 +21,11 @@ class Scoreboard {
     this._drawScore()
   }
 
+  update(score){
+    this.score = score
+    this.marker.update(this.score)
+  }
+
   _drawScore(){
     this.marker.draw()
   }

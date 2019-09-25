@@ -15,6 +15,10 @@ class Score {
     this._drawText()
   }
 
+  update(score){
+    this.points = score
+  }
+
   _drawNumber(){
     const offset = (50 * this.multiplier)
     fill(255);

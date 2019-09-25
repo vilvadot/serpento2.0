@@ -35,7 +35,10 @@ class PlayerCollection {
         this.food.x,
         this.food.y
       );
-      if (isEaten) bus.emit(FOOD_EATEN);
+      if (isEaten) {
+        bus.emit(FOOD_EATEN);
+        player.eat();
+      }
       player.draw();
     });
   }

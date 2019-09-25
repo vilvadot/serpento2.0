@@ -16,6 +16,7 @@ import {
 class Game {
   constructor(assets, bus) {
     this.assets = assets;
+    this.score = 0;
     this.bus = bus;
     this.food = new Food();
     this.players = new Players(this.food);
@@ -48,7 +49,9 @@ class Game {
     });
     this.bus.on(FOOD_EATEN, () => {
       this.food.regenerate();
-      this.timer.reset()
+      this.timer.reset();
+      this.score++;
+      this.scoreBoard.update(this.score)
     });
   }
 
