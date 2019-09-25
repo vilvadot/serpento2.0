@@ -1,9 +1,11 @@
+import config from '../config'
+
 const FONT_SIZE = 17
 
 class Score {
-  constructor(multiplier = 1, text = "EQUIPO", color, x, y) {
+  constructor(text = "EQUIPO", color, x, y) {
     this.text = text;
-    this.multiplier = multiplier;
+    this.multiplier = config.screenSize;
     this.points = 0;
     this.color = color;
     this.x = x;
@@ -20,7 +22,7 @@ class Score {
   }
 
   _drawNumber(){
-    const offset = (50 * this.multiplier)
+    const offset = (48 * this.multiplier)
     fill(255);
     noStroke();
     textSize(FONT_SIZE * this.multiplier);

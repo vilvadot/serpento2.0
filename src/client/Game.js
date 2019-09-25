@@ -43,10 +43,12 @@ class Game {
 
   _handleFood() {
     this.food.loadFoods(this.assets.foods);
+    
     this.bus.on(TIMER_RESET, () => {
       this.food.regenerate();
       this.players.updateFood(this.food);
     });
+
     this.bus.on(FOOD_EATEN, () => {
       this.food.regenerate();
       this.timer.reset();

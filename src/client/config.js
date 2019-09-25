@@ -7,7 +7,7 @@ const config = {
   width: 141,
   heightOffset: 100,
   widthOffset: 100,
-  screenSize: SCREEN_SIZE,
+  screenSize: 3,
   foodCountdown: 3,
   debug: false,
   teams: {
