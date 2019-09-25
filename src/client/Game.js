@@ -1,12 +1,20 @@
 import Players from "./Players";
 import Food from "./Food";
+import Arena from "./Arena";
+import ScoreBoard from "./ScoreBoard";
+import Timer from "./Timer";
 import { TIMER_RESET, PLAYER_POSITIONS } from "./events";
+import Logo from "./Logo";
 
 class Game {
   constructor(assets, bus) {
     this.assets = assets;
     this.bus = bus;
     this.players = new Players();
+    this.arena = new Arena();
+    this.scoreBoard = new ScoreBoard();
+    this.logo = new Logo(this.assets.logo);
+    this.timer = new Timer(this.bus);
   }
 
   start() {
@@ -17,8 +25,12 @@ class Game {
   }
 
   update() {
-    this.players.draw();
+    this.arena.draw();
+    this.scoreBoard.draw();
+    this.logo.draw()
+    this.timer.draw()
     this.food.draw();
+    this.players.draw();
   }
 
   _handleFood(){

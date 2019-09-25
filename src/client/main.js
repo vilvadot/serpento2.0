@@ -1,8 +1,4 @@
 import p5 from "p5";
-import Arena from "./Arena";
-import Scoreboard from "./Scoreboard";
-import Logo from "./Logo";
-import Timer from "./Timer";
 import Game from "./Game";
 import Assets from "./Assets";
 import Server from "./Server";
@@ -12,10 +8,6 @@ require("dotenv").config();
 
 global.p5 = p5;
 
-const arena = new Arena();
-const scoreBoard = new Scoreboard();
-const logo = new Logo();
-const timer = new Timer(bus);
 let assets, game;
 
 const sketch = () => {
@@ -34,10 +26,6 @@ const sketch = () => {
 
   draw = () => {
     background(0);
-    arena.draw();
-    logo.draw(assets.logo);
-    scoreBoard.draw();
-    timer.draw(); // This updated every frame. Should be updated outside the main loop
     game.update();
   };
 };
