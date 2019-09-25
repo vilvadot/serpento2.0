@@ -4,7 +4,7 @@ import {random} from './utilities'
 import config from './config'
 
 const FONT_SIZE = 10;
-const DEFAULT_SIZE = 10;
+const DEFAULT_SIZE = 6;
 
 class Food {
   constructor() {

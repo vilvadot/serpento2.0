@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import Timer from "./Timer";
 import Game from "./Game";
 import Assets from "./Assets";
+import Server from "./Server";
 import bus from "./bus";
 
 require("dotenv").config();
@@ -24,6 +25,7 @@ const sketch = () => {
   };
 
   setup = () => {
+    Server.start();
     createCanvas(1000, 600);
     background(0);
     textFont(assets.font);

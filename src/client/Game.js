@@ -1,10 +1,6 @@
-import mockData from "./mock_tracking.json";
-import Replayer from "../replayer/Replayer";
 import Players from "./Players";
 import Food from "./Food";
-import { TIMER_RESET } from "./events";
-
-const FREQUENCY = 50;
+import { TIMER_RESET, PLAYER_POSITIONS } from "./events";
 
 class Game {
   constructor(assets, bus) {
@@ -14,9 +10,9 @@ class Game {
   }
 
   start() {
-    this.food = new Food()
+    this.food = new Food();
     this.food.loadFoods(this.assets.foods);
-    this.bus.on(TIMER_RESET, () => this.food.reposition());
+    this._handleFood()
     this._handlePlayerPositions();
   }
 
@@ -25,11 +21,13 @@ class Game {
     this.food.draw();
   }
 
+  _handleFood(){
+    this.bus.on(TIMER_RESET, () => this.food.reposition());
+  }
+  
   _handlePlayerPositions() {
-    const fakeServer = new Replayer(mockData, FREQUENCY);
-
-    fakeServer.replay(message => {
-      this._updatePlayers(message.blobs);
+    this.bus.on(PLAYER_POSITIONS, positions => {
+      this._updatePlayers(positions)
     });
   }
 
