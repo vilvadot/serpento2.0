@@ -1,4 +1,7 @@
 import {randomHexColor} from '../utilities'
+import config from '../config'
+
+const BLINK_DURATION = 100;
 
 class SnakeSegment{
   constructor(color, parent){
@@ -8,6 +11,7 @@ class SnakeSegment{
     this.angle = 0;
     this.length = 20;
     this.weight = 10;
+    this.isBlinking = false;
     this.a = this.parent.b.copy();
     this.b = this.computeB();
   }
@@ -40,7 +44,30 @@ class SnakeSegment{
   //   }
   // }
 
+  blink(){
+    if (!this.isBlinking) {
+      const oldColor = this.color;
+      this.color = "#fff";
+      this.isBlinking = true;
+      setTimeout(() => {
+        this.color = oldColor;
+        this.isBlinking = false;
+      }, BLINK_DURATION);
+    }
+  }
+
+  _debug() {
+    const fontSize = config.screenSize * 6;
+    const x = Math.floor(this.a.x)
+    const y = Math.floor(this.a.y)
+    noStroke();
+    fill(255);
+    textSize(fontSize);
+    text(`A: ${x},${y}, B: ${x},${y}`, x + 20, y);
+  }
+
   draw(){
+    if(config.debug) this._debug()
     this._update()
     fill(this.color);
     stroke(this.color);

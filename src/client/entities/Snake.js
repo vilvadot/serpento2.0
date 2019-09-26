@@ -3,8 +3,6 @@ import SnakeHead from "./SnakeHead";
 import config from "../config";
 import { random, translateX, translateY } from "../utilities";
 
-const BLINK_DURATION = 100;
-
 class Snake {
   constructor(id, x, y) {
     this.id = id;
@@ -48,15 +46,7 @@ class Snake {
   }
 
   _blink() {
-    if (!this.isBlinking) {
-      const oldColor = this.color;
-      this.color = "#fff";
-      this.isBlinking = true;
-      setTimeout(() => {
-        this.color = oldColor;
-        this.isBlinking = false;
-      }, BLINK_DURATION);
-    }
+    this.segments.forEach(segment => segment.blink());
   }
 
   _getRandomColor() {
