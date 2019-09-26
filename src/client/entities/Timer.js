@@ -20,7 +20,7 @@ export default class TimeMarker {
     fill(255);
     text(
       this._getTimeString(),
-      this.x * this.multiplier,
+      this.x * this.multiplier - 20,
       this.y * this.multiplier
     );
   }

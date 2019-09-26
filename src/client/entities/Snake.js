@@ -1,4 +1,5 @@
 import SnakeSegment from "./SnakeSegment";
+import SnakeHead from "./SnakeHead";
 import config from "../config";
 import { random, translateX, translateY } from "../utilities";
 
@@ -12,7 +13,13 @@ class Snake {
     this.x = translateX(x);
     this.y = translateY(y);
     this.isBlinking = false;
-    this.segments = [new SnakeSegment(this.color)];
+    this.segments = this._build()
+  }
+
+  _build(){
+    const head = new SnakeHead(this.color)
+    const snake = [head, new SnakeSegment(this.color, head)]
+    return snake
   }
 
   eat() {
@@ -26,7 +33,7 @@ class Snake {
   }
 
   draw() {
-    this.segments.forEach(segment => segment.draw(this.x, this.y, this.color));
+    this.segments.forEach(segment => segment.draw(this.x, this.y));
     if(config.debug) this._debug();
   }
 
@@ -57,56 +64,3 @@ class Snake {
 }
 
 export default Snake;
-
-// const createSnake = (game, p5, player, snakeColor, snakeIndex, team) => {
-
-//   const snake = [];
-//   let i;
-//   snake.push(
-//         new SnakeSegment(
-//           p5,
-//           `${player.id}`,
-//           team,
-//           0,
-//           undefined,
-//           segmentLength,
-//           0, // If you see lines popping up its this line set to 0
-//           snakeColor,
-//           Number(player.y)*canvasHeight + canvasTopOffset,
-//           Number(player.x)*canvasWidth
-//       ));
-//   for(i = 1; i < segmentNum; i++ ){
-//     snake.push(
-//         new SnakeSegment(
-//           p5,                                            // p5
-//           `${player.id}-${i== segmentNum-1 ? 'head':i}`, // id
-//           team,
-//           snakeIndex,                                    // index
-//           snake[i-1],                                    // parent
-//           segmentLength,                                 // Length
-//           (headWeight/segmentNum)*(i),
-//           snakeColor
-//         )
-//       );
-//   }
-//   return snake;
-// };
-
-// const drawSnake = (game, segments, position, food) => {
-//   let i = segments.length - 1;
-//   for(i; i >= 0; i--){
-//     segments[i].draw();
-//     if(segments[i].id.includes('head')){
-//       segments[i].checkIfEaten(game, food);
-//       // Head follows the tracking positions
-//       segments[i].follow(
-//               Number(position.x)*canvasWidth,
-//               Number(position.y)*canvasHeight + canvasTopOffset
-//               );
-//     }else{
-//       // Rest of the segments follows previous link (snake is built in reverse)
-//       segments[i].follow(segments[i+1].a.x, segments[i+1].a.y);
-//     }
-//     segments[i].update();
-//   }
-// };
