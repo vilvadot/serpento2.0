@@ -1,6 +1,5 @@
 import bus from "./bus";
 import {MOUSE_POSITION} from './events'
-import config from './config'
 
 class Mouse {
   static handleMouseMove(event) {
