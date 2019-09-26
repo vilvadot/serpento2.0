@@ -1,8 +1,8 @@
 import p5 from "p5";
 import Game from "./entities/Game";
 import Assets from "./entities/Assets";
+import Mouse from "./entities/Mouse";
 import Server from "./Server";
-import Mouse from "./Mouse";
 import bus from "./bus";
 
 require("dotenv").config();

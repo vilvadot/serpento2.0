@@ -1,5 +1,5 @@
-import bus from "./bus";
-import {MOUSE_POSITION} from './events'
+import bus from "../bus";
+import {MOUSE_POSITION} from '../events'
 
 class Mouse {
   static handleMouseMove(event) {

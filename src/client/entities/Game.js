@@ -11,8 +11,6 @@ import {
   FOOD_EATEN
 } from "../events";
 
-// TODO: Pintar segmentos de serpiente
-
 class Game {
   constructor(assets, bus) {
     this.assets = assets;
