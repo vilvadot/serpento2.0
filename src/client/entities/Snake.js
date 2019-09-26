@@ -13,12 +13,14 @@ class Snake {
     this.x = translateX(x);
     this.y = translateY(y);
     this.isBlinking = false;
-    this.segments = this._build()
+    this.segments = this._build(this.x, this.y)
   }
 
-  _build(){
-    const head = new SnakeHead(this.color)
-    const snake = [head, new SnakeSegment(this.color, head)]
+  _build(x, y){
+    const head = new SnakeHead(this.color, x, y)
+    const segment1 = new SnakeSegment(this.color, head)
+    const segment2 = new SnakeSegment(this.color, segment1)
+    const snake = [head, segment1, segment2]
     return snake
   }
 

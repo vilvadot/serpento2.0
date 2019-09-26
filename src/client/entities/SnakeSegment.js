@@ -1,10 +1,13 @@
+import {randomHexColor} from '../utilities'
+
 class SnakeSegment{
   constructor(color, parent){
-    this.color = color
+    // this.color = color
+    this.color = randomHexColor()
     this.parent = parent
     this.angle = 0;
     this.length = 20;
-    this.weight = 3;
+    this.weight = 10;
     this.a = this.parent.b.copy();
     this.b = this.computeB();
   }
@@ -17,10 +20,11 @@ class SnakeSegment{
 
   _update(){
     this.b = this.computeB();
+    this._follow(this.parent.b.x, this.parent.b.y)
   }
 
-  _follow(targetX, targetY){
-    const target = createVector(targetX, targetY);
+  _follow(x, y){
+    const target = createVector(x, y);
     const direction = target.copy().sub(this.a);
     this.angle = direction.heading();
     direction.setMag(this.length);
@@ -38,7 +42,6 @@ class SnakeSegment{
 
   draw(){
     this._update()
-    this._follow(this.parent.b.x, this.parent.b.y)
     fill(this.color);
     stroke(this.color);
     strokeWeight(this.weight);

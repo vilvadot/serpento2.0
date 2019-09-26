@@ -27,18 +27,22 @@ class PlayerCollection {
     return this.players.find(player => player.id === id);
   }
 
+  _checkIfAte(player){
+    const isEaten = Collision.check(
+      player.x,
+      player.y,
+      this.food.x,
+      this.food.y
+    );
+    if (isEaten) {
+      bus.emit(FOOD_EATEN);
+      player.eat();
+    }
+  }
+
   draw() {
     this.players.forEach(player => {
-      const isEaten = Collision.check(
-        player.x,
-        player.y,
-        this.food.x,
-        this.food.y
-      );
-      if (isEaten) {
-        bus.emit(FOOD_EATEN);
-        player.eat();
-      }
+      this._checkIfAte(player)
       player.draw();
     });
   }
