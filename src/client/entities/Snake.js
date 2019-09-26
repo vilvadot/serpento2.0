@@ -1,7 +1,7 @@
 import SnakeSegment from "./SnakeSegment";
 import SnakeHead from "./SnakeHead";
 import config from "../config";
-import { random, translateX, translateY } from "../utilities";
+import { randomHexColor, translateX, translateY } from "../utilities";
 
 class Snake {
   constructor(id, x, y) {
@@ -16,15 +16,18 @@ class Snake {
 
   _build(x, y){
     const head = new SnakeHead(this.color, x, y)
-    const segment1 = new SnakeSegment(head)
-    const segment2 = new SnakeSegment(segment1)
-    const snake = [head, segment1, segment2]
+    const snake = [head]
+    for(let i = 1; i < config.snake.segments; i++){
+      const previousSegment = snake[i - 1]
+      snake.push(new SnakeSegment(previousSegment))
+    }
     return snake
   }
 
   eat() {
     this.points++
     this._blink();
+    this._grow();
   }
 
   update({ x, y }) {
@@ -49,9 +52,13 @@ class Snake {
     this.segments.forEach(segment => segment.blink());
   }
 
+  _grow() {
+    this.segments.forEach(segment => segment.grow && segment.grow());
+  }
+
+
   _getRandomColor() {
-    const randomIndex = random(config.teams.red.length);
-    return config.teams.red[randomIndex];
+    return randomHexColor()
   }
 }
 

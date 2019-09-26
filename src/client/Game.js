@@ -29,7 +29,7 @@ class Game {
   start() {
     this._handleMousePlayer();
     this._handleFood();
-    // this._handlePlayerPositions();
+    this._handlePlayerPositions();
   }
 
   update() {

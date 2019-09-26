@@ -4,12 +4,11 @@ const BLINK_DURATION = 100;
 
 class SnakeHead {
   constructor(color, x, y) {
-    // this.color = color
-    this.color = "#F74F6A";
-    this.size = config.snake.width;
+    this.size = config.snake.weight;
     this.a = createVector(x, y);
     this.b = createVector(x, y);
     this.isBlinking = false
+    this.color = color;
   }
 
   blink(){

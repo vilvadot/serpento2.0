@@ -1,9 +1,7 @@
 require("dotenv").config();
 
-let { SCREEN_SIZE } = process.env;
-
 const config = {
-  debug: true,
+  debug: false,
   screen: {
     height: 192,
     width: 142,
@@ -15,8 +13,9 @@ const config = {
     countdown: '3'
   },
   snake: {
+    growthRate: 1.05,
     weight: 20,
-    segments: 5,
+    segments: 20,
     segmentLength: 20,
   },
   teams: {
