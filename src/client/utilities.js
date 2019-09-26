@@ -10,11 +10,11 @@ export const random = (max, min = 0) => {
 };
 
 export const translateX = x => {
-  return Math.floor(x * config.width * config.screenSize + config.widthOffset);
+  return Math.floor(x * config.screen.width * config.screen.size + config.screen.widthOffset);
 };
 
 export const translateY = y => {
   return Math.floor(
-    y * config.height * config.screenSize + config.heightOffset
+    y * config.screen.height * config.screen.size + config.screen.heightOffset
   );
 };

@@ -5,7 +5,7 @@ const FONT_SIZE = 17
 class Score {
   constructor(text = "EQUIPO", color, x, y) {
     this.text = text;
-    this.multiplier = config.screenSize;
+    this.multiplier = config.screen.size;
     this.points = 0;
     this.color = color;
     this.x = x;

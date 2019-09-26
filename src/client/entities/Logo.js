@@ -2,7 +2,7 @@ import config from '../config'
 
 class Logo {
   constructor(image) {
-    this.multiplier = config.screenSize;
+    this.multiplier = config.screen.size;
     this.image = image
   }
 

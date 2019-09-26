@@ -16,8 +16,8 @@ class Snake {
 
   _build(x, y){
     const head = new SnakeHead(this.color, x, y)
-    const segment1 = new SnakeSegment(this.color, head)
-    const segment2 = new SnakeSegment(this.color, segment1)
+    const segment1 = new SnakeSegment(head)
+    const segment2 = new SnakeSegment(segment1)
     const snake = [head, segment1, segment2]
     return snake
   }
@@ -38,7 +38,7 @@ class Snake {
   }
 
   _debug() {
-    const fontSize = config.screenSize * 6;
+    const fontSize = config.screen.size * 6;
     noStroke();
     fill(255);
     textSize(fontSize);

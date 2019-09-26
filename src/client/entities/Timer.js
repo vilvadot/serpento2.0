@@ -2,14 +2,14 @@ import config from "../config";
 import { TIMER_RESET } from "../events";
 
 const FONT_SIZE = 19;
-const TIME_IN_SECONDS = config.foodCountdown;
+const TIME_IN_SECONDS = config.food.countdown;
 const DEFAULT_TIME = TIME_IN_SECONDS * 1000;
 
 export default class TimeMarker {
   constructor(bus) {
     this.bus = bus;
     this.time = DEFAULT_TIME;
-    this.multiplier = config.screenSize;
+    this.multiplier = config.screen.size;
     this.x = 125;
     this.y = 28;
   }

@@ -8,7 +8,7 @@ const DEFAULT_SIZE = 6;
 
 class Food {
   constructor() {
-    this.multiplier = config.screenSize
+    this.multiplier = config.screen.size
     this.x = random(192 * this.multiplier, 0);
     this.y = random(157 * this.multiplier, 32 * this.multiplier);
     this.size = DEFAULT_SIZE * this.multiplier;

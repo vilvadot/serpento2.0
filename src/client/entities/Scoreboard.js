@@ -3,7 +3,7 @@ import config from '../config'
 
 class Scoreboard {
   constructor() {
-    this.multiplier = config.screenSize;
+    this.multiplier = config.screen.size;
     this.marker = new Score('EQUIPO 1', 'red', 40, 28);
   }
 

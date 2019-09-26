@@ -1,10 +1,12 @@
+import config from '../config'
+
 const BLINK_DURATION = 100;
 
 class SnakeHead {
   constructor(color, x, y) {
     // this.color = color
     this.color = "#F74F6A";
-    this.size = 25;
+    this.size = config.snake.width;
     this.a = createVector(x, y);
     this.b = createVector(x, y);
     this.isBlinking = false

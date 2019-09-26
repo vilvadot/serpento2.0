@@ -4,13 +4,12 @@ import config from '../config'
 const BLINK_DURATION = 100;
 
 class SnakeSegment{
-  constructor(color, parent){
-    // this.color = color
-    this.color = randomHexColor()
+  constructor(parent){
     this.parent = parent
+    this.color = this.parent.color
     this.angle = 0;
-    this.length = 20;
-    this.weight = 10;
+    this.length = config.snake.segmentLength;
+    this.weight = this.parent.weight * .9 || config.snake.weight;
     this.isBlinking = false;
     this.a = this.parent.b.copy();
     this.b = this.computeB();
@@ -23,8 +22,8 @@ class SnakeSegment{
   }
 
   _update(){
+    this._follow(this.parent.a.x, this.parent.a.y)
     this.b = this.computeB();
-    this._follow(this.parent.b.x, this.parent.b.y)
   }
 
   _follow(x, y){
@@ -57,7 +56,7 @@ class SnakeSegment{
   }
 
   _debug() {
-    const fontSize = config.screenSize * 6;
+    const fontSize = config.screen.size * 6;
     const x = Math.floor(this.a.x)
     const y = Math.floor(this.a.y)
     noStroke();
