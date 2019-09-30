@@ -1,7 +1,7 @@
 import Players from "./Players";
 import Food from "./Food";
 import Arena from "./Arena";
-import ScoreBoard from "./ScoreBoard";
+import ScoreBoard from "./Scoreboard";
 import Timer from "./Timer";
 import Logo from "./Logo";
 import {
