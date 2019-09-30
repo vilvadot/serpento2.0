@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "",
   "scripts": {
-    "client:build": "parcel build src/index.html --no-source-maps --no-content-hash --experimental-scope-hoisting --target browser --public-url ./dist/",
+    "client:build": "parcel build src/index.html --no-source-maps --no-content-hash --experimental-scope-hoisting --target browser ",
     "client:dev": "parcel src/index.html",
     "record": "node src/server/ccv-recorder/record.js ",
     "relay": "node src/server/ccv-relay/index.js "
