@@ -33,6 +33,7 @@ class SnakeHead {
   draw(x, y) {
     this._updatePosition(x, y);
     fill(this.color);
+    noStroke();
     ellipse(this.b.x, this.b.y, this.size, this.size);
   }
 }
