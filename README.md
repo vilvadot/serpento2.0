@@ -1,5 +1,8 @@
 # Serpento
 
+<img width="300" alt="serpento" src="https://user-images.githubusercontent.com/8507571/65879632-21954980-e388-11e9-8e3b-158ccee9bc66.png">
+
+
 SERPENTO is an interactive installation designed for the digital façade of [Medialab-Prado](https://www.medialab-prado.es/). This project was part of the ‘Juegos Reunidos’ 2017 residence program, held by the Bureau of Culture and Sports of the City of Madrid.
 
 ** Disclaimer:**  This is a refactor of the original game, made to show the tech side of the piece but not representative 100% of the original interactive experience.
