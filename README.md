@@ -16,3 +16,10 @@ To avoid this, there is provided a "recorder" that will take N seconds of CCV tr
 # Relay
 
 The relayer is a substitute for the CCV. Serpento will interface with it as if it is the original tracking software and snakes will play using old recorded data. This is just a tool to make it work online.
+
+## Enviroment
+
+* CV_IP: IP where CCV is emitting OSC
+* CV_PORT: PORT where CCV is emitting OSC
+* PORT: Sockets port
+* RECORD_TIME: Time in ms to record tracking data
